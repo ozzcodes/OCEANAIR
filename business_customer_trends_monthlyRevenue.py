@@ -30,7 +30,7 @@ pyoff.init_notebook_mode()
 # In[3]:
 
 
-tx_data = pd.read_csv('Business_ReviewData_2020.csv')
+tx_data = pd.read_csv( 'data/Business_ReviewData_2020.csv' )
 tx_data.head(10)
 
 
