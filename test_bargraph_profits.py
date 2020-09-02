@@ -103,7 +103,7 @@ def bulletgraph(data=None, limits=None, labels=None, axis_label=None, title=None
 
 data_to_plot = "data/Business_ReviewData_2020v2.csv"
 bulletgraph(data_to_plot, limits=[100000, 200000, 500000, 750000, 1000000], 
-            labels=['Poor', 'Ok', 'Good', 'Excellent'],size=(8, 5), 
+            labels=['Poor', 'Ok', 'Good', 'Excellent'], size=(8, 5),
             axis_label='Performance Measure', label_color='black',
             bar_color='#252525', target_color='#f7f7f7', 
             title="Sales Rep Performance")
