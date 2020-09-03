@@ -17,6 +17,6 @@ def data_query():
     # for row in cursor.fetchall():
     #     print(row)
 
-    excel_file = df.to_csv("AllShipments.csv", index=False, index_label='FILE NO')
+    excel_file = df.to_csv("../data/AllShipments.csv", index=False, index_label='FILE NO')
 
     return excel_file

@@ -28,7 +28,7 @@ def pg_load_table():
     # Create sqlalchemy engine connection to postgres
     engine = create_engine('postgresql+psycopg2://postgres:0212181@localhost:5432/All_Shipments')
 
-    csv_file = 'AllShipments.csv'
+    csv_file = '../data/AllShipments.csv'
 
     df = pd.read_csv(csv_file, index_col="FILE NO", error_bad_lines=False, dtype='unicode')
     load_data = df.to_sql('ytd_data', con=engine, if_exists='replace', index=True, index_label='FILE NO')
