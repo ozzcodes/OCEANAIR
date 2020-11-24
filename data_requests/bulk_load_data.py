@@ -26,7 +26,7 @@ def config(filename='database.ini', section='postgresql'):
 
 def pg_load_table():
     # Create sqlalchemy engine connection to postgres
-    engine = create_engine('postgresql+psycopg2://postgres:0212181@localhost:5432/All_Shipments')
+    engine = create_engine('postgresql+psycopg2://postgres:0212181@localhost:5432/postgres')
 
     csv_file = '../data/AllShipments.csv'
 
