@@ -15,8 +15,9 @@ import seaborn as sns
 
 import plotly.offline as pyoff
 import plotly.graph_objs as go
-
-get_ipython().run_line_magic('matplotlib', 'inline')
+# from IPython import get_ipython
+#
+# get_ipython().run_line_magic('matplotlib', 'inline')
 
 # ##### Initiate a visualization library for notebook
 
@@ -63,7 +64,7 @@ tx_data.groupby('Date_YearMonth')['REVENUE'].sum()
 
 
 tx_revenue = tx_data.groupby(['Date_YearMonth'])['REVENUE'].sum().reset_index()
-tx_revenue
+tx_revenue.head()
 
 # #### Create the visualization
 
@@ -136,7 +137,7 @@ tx_div.head()
 tx_monthly_active = tx_div.groupby('Date_YearMonth')['FILE_NO'].nunique().reset_index()
 
 # print the dataframe
-tx_monthly_active
+tx_monthly_active.head()
 
 # In[16]:
 
@@ -170,7 +171,7 @@ tx_monthly_active['FILE_NO'].mean()
 
 
 tx_monthly_sales = tx_div.groupby('Date_YearMonth')['PROFIT'].sum().reset_index()
-tx_monthly_sales
+tx_monthly_sales.head(10)
 
 # In[20]:
 
@@ -202,7 +203,7 @@ tx_monthly_sales['PROFIT'].mean()
 
 
 tx_monthly_profit_avg = tx_div.groupby('Date_YearMonth')['REVENUE'].mean().reset_index()
-tx_monthly_profit_avg
+tx_monthly_profit_avg.head()
 
 # In[24]:
 
@@ -244,7 +245,7 @@ tx_min_purchase.columns = ['CUSTOMER_NAME', 'MinPurchaseDate']
 
 tx_min_purchase['MinPurchaseYearMonth'] = tx_min_purchase['MinPurchaseDate'].map(
     lambda date: 100 * date.year + date.month)
-tx_min_purchase
+tx_min_purchase.head()
 
 # In[29]:
 
@@ -345,7 +346,7 @@ tx_min_purchase.head()
 
 
 unq_month_year = tx_min_purchase.MinPurchaseYearMonth.unique()
-unq_month_year
+unq_month_year.head(10)
 
 
 # In[41]:
