@@ -3,3 +3,5 @@
 /.ipynb_checkpoints/monthly_revenue-checkpoint.ipynb
 /.idea/dictionaries/ozzco.xml
 *.pyc
+/.idea/aws.xml
+/.idea/dbnavigator.xml
