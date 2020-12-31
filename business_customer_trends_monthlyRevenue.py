@@ -15,9 +15,9 @@ import seaborn as sns
 
 import plotly.offline as pyoff
 import plotly.graph_objs as go
-# from IPython import get_ipython
-#
-# get_ipython().run_line_magic('matplotlib', 'inline')
+from IPython import get_ipython
+
+get_ipython().run_line_magic('matplotlib', 'inline')
 
 # ##### Initiate a visualization library for notebook
 
@@ -27,7 +27,6 @@ import plotly.graph_objs as go
 pyoff.init_notebook_mode()
 
 # In[3]:
-
 
 tx_data = pd.read_csv('data/Business_ReviewData_2020.csv')
 tx_data.head(10)
