@@ -3,6 +3,7 @@ from configparser import ConfigParser
 from data_requests.data_import import data_query
 import pandas as pd
 from sqlalchemy import create_engine
+from data_cleanse import default_data
 
 
 # #### Not necessary for this data upload #### #
@@ -37,8 +38,12 @@ def pg_load_table():
     print(df.index)
 
 
-# Run the main function to import the newly generated CSV file into the SQL Database
+"""
+Run the main function to import the newly generated CSV file into the SQL Database
+and create a cleaned CSV file to work with separately (AllShipments_cleaned.csv)
+"""
 if __name__ == '__main__':
     data_query()
     sleep(10)
     pg_load_table()
+    default_data()
