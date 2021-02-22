@@ -20,9 +20,62 @@ def query_division(div):
     return df
 
 
-def query_sales(sales_group):
-    return sales_group
+def query_sales():
+    df_sales = pd.read_csv('../data/AllShipments_cleaned.csv',
+                           low_memory=False).reset_index(drop=True).drop(columns='Unnamed: 0')
+
+    # df_new = df_sales[[
+    #     'SALESMAN NAME', 'REPORT DATE', 'METHOD OF TRANSPORT', 'DIVISION',
+    #     'BUSINESS LINE', 'CUSTOMER NAME', 'PORT OF LOAD NAME', 'PORT OF DCHG NAME',
+    #     'REVENUE', 'EXPENSE', 'PROFIT', 'TOTAL REVENUE LESS DUTIES',
+    #     'TOTAL BILLED TO ACCOUNT', 'TOTAL DUTY BILLED', 'GROSS WEIGHT',
+    #
+    # ]]
+
+    # column_names = [
+    #     'SALESMAN_NAME', 'REPORT_DATE', 'METHOD_OF_TRANSPORT', 'DIVISION',
+    #     'CUSTOMER_NAME', 'REVENUE', 'EXPENSE', 'PROFIT'
+    # ]
+
+    print(df_sales.index)
+
+    column_names = [
+        'SALESMAN_NAME', 'REVENUE', 'EXPENSE', 'PROFIT'
+    ]
+
+    sales_data = pd.DataFrame(columns=column_names)
+
+    for data in df_sales:
+        salesman_name = data['SALESMAN NAME']['SALESMAN_NAME']
+        # report_date = data['REPORT DATE']['REPORT_DATE']
+        # customer = data['CUSTOMER NAME']['CUSTOMER_NAME']
+        # method_transport = data['METHOD OF TRANSPORT']['METHOD_OF_TRANSPORT']
+        # div = data['DIVISION']['DIVISION']
+        rev = data['REVENUE']['REVENUE']
+        exp = data['EXPENSE']['EXPENSE']
+        profit = data['PROFIT']['PROFIT']
+
+        sales_data = sales_data.append({
+            'SALESMAN_NAME': salesman_name,
+            # 'REPORT_DATE': report_date,
+            # 'CUSTOMER_NAME': customer,
+            # 'METHOD_OF_TRANSPORT': method_transport,
+            # 'DIVISION': div,
+            'REVENUE': rev,
+            'EXPENSE': exp,
+            'PROFIT': profit,
+        }, ignore_index=True)
+
+    print(sales_data.head(20))
 
 
 if __name__ == '__main__':
     print(query_division(10))
+    query_sales()
+
+# ["Christine Roderick", "ED KAPLAN/HOUSE", "GEORGE T.", "JODI O",
+#                              "JOE WYSON/HOUSE", "JOLSON - PW REASSIGNED", "JOLSON - REASSIGNED",
+#                              "VALERIE KOEN", "PDAVIS REASSIGNED", "PDAVIS", "KL'HEUREUX",
+#                              "KL'HEUREUX - PW REASSIGNED", "Justin Andrews", "PDAVIS - PW REASSIGNED",
+#                              "TSIROGIANIS - PW REASSIGNED", "VALERIE KOEN - REASSIGNED", "KL'HEUREUX - PW",
+#                              "KL'HEUREUX - REASSIGNED"]
