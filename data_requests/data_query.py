@@ -1,5 +1,6 @@
 import pandas as pd
 from datetime import datetime, date
+import random
 
 """
 Create a function to query specific data
@@ -13,6 +14,7 @@ def query_division(div):
     }
     format_dict['DIVISION'] = int
     format_dict['GROSS_WEIGHT'] = int
+    format_dict['SALESMAN CODE'] = int
 
     df['REPORT DATE'] = pd.to_datetime(df['REPORT DATE'])
     df = df.query(f"DIVISION == {div}").reset_index(drop=True).drop(columns='Unnamed: 0')
@@ -23,6 +25,13 @@ def query_division(div):
 def query_sales():
     df_sales = pd.read_csv('../data/AllShipments_cleaned.csv',
                            low_memory=False).reset_index(drop=True).drop(columns='Unnamed: 0')
+
+    format_dict = {
+        col_name: '{:,.2f}' for col_name in df_sales.select_dtypes(float).columns
+    }
+
+    format_dict['SALESMAN CODE'] = int
+    df_sales['REPORT DATE'] = pd.to_datetime(df_sales['REPORT DATE'])
 
     # df_new = df_sales[[
     #     'SALESMAN NAME', 'REPORT DATE', 'METHOD OF TRANSPORT', 'DIVISION',
@@ -40,13 +49,13 @@ def query_sales():
     print(df_sales.index)
 
     column_names = [
-        'SALESMAN_NAME', 'REVENUE', 'EXPENSE', 'PROFIT'
+        'SALESMAN_CODE', 'REVENUE', 'EXPENSE', 'PROFIT'
     ]
 
     sales_data = pd.DataFrame(columns=column_names)
 
     for data in df_sales:
-        salesman_name = data['SALESMAN NAME']['SALESMAN_NAME']
+        salesman = data['SALESMAN CODE']
         # report_date = data['REPORT DATE']['REPORT_DATE']
         # customer = data['CUSTOMER NAME']['CUSTOMER_NAME']
         # method_transport = data['METHOD OF TRANSPORT']['METHOD_OF_TRANSPORT']
@@ -56,7 +65,7 @@ def query_sales():
         profit = data['PROFIT']['PROFIT']
 
         sales_data = sales_data.append({
-            'SALESMAN_NAME': salesman_name,
+            'SALESMAN_CODE': salesman,
             # 'REPORT_DATE': report_date,
             # 'CUSTOMER_NAME': customer,
             # 'METHOD_OF_TRANSPORT': method_transport,
