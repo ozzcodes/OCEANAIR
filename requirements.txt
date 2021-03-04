@@ -3,7 +3,7 @@ matplotlib
 seaborn
 numpy
 sklearn
-xgboost
+#xgboost
 plotly
 SQLAlchemy
 pyodbc
