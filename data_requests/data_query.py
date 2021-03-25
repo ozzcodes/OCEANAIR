@@ -80,10 +80,10 @@ def query_sales():
 
 def query_customer(customer_name):
     df_customer = pd.read_csv('../data/AllShipments_cleaned.csv',
-                              low_memory=False).reset_index(drop=True).drop(columns='Unnamed: 0')
+                              low_memory=False).reset_index(
+        drop=True).drop(columns='Unnamed: 0').dropna(subset=['CUSTOMER NAME'])
 
-    df_customer = df_customer.query("CUSTOMER NAME".format(name=input([]))).reset_index(drop=True).drop(
-        columns='Unnamed: 0')
+    df_customer = df_customer[df_customer['CUSTOMER NAME'].str.contains(customer_name)]
 
     return df_customer
 
