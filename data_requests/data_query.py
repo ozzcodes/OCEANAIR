@@ -84,7 +84,9 @@ def query_customer(customer_name):
         drop=True).drop(columns='Unnamed: 0').dropna(subset=['CUSTOMER NAME'])
 
     df_customer = df_customer[df_customer['CUSTOMER NAME'].str.contains(customer_name)]
-
+    
+    df_customer.to_csv(f"{customer_name}.csv", index='FILE NO')
+    
     return df_customer
 
 
