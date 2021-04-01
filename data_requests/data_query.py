@@ -1,6 +1,5 @@
 import pandas as pd
 from datetime import datetime, date
-import random
 
 """
 Create a function to query specific data
