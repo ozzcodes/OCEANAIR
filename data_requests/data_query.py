@@ -77,7 +77,7 @@ def query_sales():
     print(sales_data.head(20))
 
 
-def query_customer(customer_name):
+def query_customer(customer_name, time_period):
     df_customer = pd.read_csv('../data/AllShipments_cleaned.csv',
                               low_memory=False).reset_index(
         drop=True).drop(columns='Unnamed: 0').dropna(subset=['CUSTOMER NAME'])
