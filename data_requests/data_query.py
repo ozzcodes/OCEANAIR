@@ -77,26 +77,34 @@ def query_sales():
     print(sales_data.head(20))
 
 
-def query_customer(customer_name, time_period):
+def query_dates():
+    df_date = pd.read_csv('../data/AllShipments_cleaned.csv',
+                          low_memory=False).reset_index(
+        drop=True).drop(columns='Unnamed: 0').dropna(subset=['REPORT DATE'])
+
+    start_date = "1/1/2019"
+    end_date = "3/31/2021"
+
+    after_start_date = df_date['REPORT DATE'] >= start_date
+    before_end_date = df_date['REPORT DATE'] <= end_date
+
+    timeframe = after_start_date & before_end_date
+    df_date = df_date[df_date['REPORT DATE']]
+
+    return df_date
+
+
+def query_customer(customer_name, timeframe):
     df_customer = pd.read_csv('../data/AllShipments_cleaned.csv',
                               low_memory=False).reset_index(
         drop=True).drop(columns='Unnamed: 0').dropna(subset=['CUSTOMER NAME'])
 
     df_customer = df_customer[df_customer['CUSTOMER NAME'].str.contains(customer_name)]
-    
     df_customer.to_csv(f"{customer_name}.csv", index='FILE NO')
-    
-    return df_customer
 
 
 if __name__ == '__main__':
     print(query_division(10))
     # query_sales()
-    print(query_customer('WELLPET LLC'))
+    print(query_customer('WELLPET LLC', timeframe=query_dates()))
 
-# ["Christine Roderick", "ED KAPLAN/HOUSE", "GEORGE T.", "JODI O",
-#                              "JOE WYSON/HOUSE", "JOLSON - PW REASSIGNED", "JOLSON - REASSIGNED",
-#                              "VALERIE KOEN", "PDAVIS REASSIGNED", "PDAVIS", "KL'HEUREUX",
-#                              "KL'HEUREUX - PW REASSIGNED", "Justin Andrews", "PDAVIS - PW REASSIGNED",
-#                              "TSIROGIANIS - PW REASSIGNED", "VALERIE KOEN - REASSIGNED", "KL'HEUREUX - PW",
-#                              "KL'HEUREUX - REASSIGNED"]

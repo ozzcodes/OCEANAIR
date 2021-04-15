@@ -1,0 +1,8 @@
+SALES REPS:
+
+# ["Christine Roderick", "ED KAPLAN/HOUSE", "GEORGE T.", "JODI O",
+#                              "JOE WYSON/HOUSE", "JOLSON - PW REASSIGNED", "JOLSON - REASSIGNED",
+#                              "VALERIE KOEN", "PDAVIS REASSIGNED", "PDAVIS", "KL'HEUREUX",
+#                              "KL'HEUREUX - PW REASSIGNED", "Justin Andrews", "PDAVIS - PW REASSIGNED",
+#                              "TSIROGIANIS - PW REASSIGNED", "VALERIE KOEN - REASSIGNED", "KL'HEUREUX - PW",
+#                              "KL'HEUREUX - REASSIGNED"]
