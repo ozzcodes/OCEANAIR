@@ -77,7 +77,7 @@ def query_sales():
     print(sales_data.head(20))
 
 
-def query_dates():
+def query_dates(timeframe):
     df_date = pd.read_csv('../data/AllShipments_cleaned.csv',
                           low_memory=False).reset_index(
         drop=True).drop(columns='Unnamed: 0').dropna(subset=['REPORT DATE'])
@@ -91,7 +91,7 @@ def query_dates():
     timeframe = after_start_date & before_end_date
     df_date = df_date[df_date['REPORT DATE']]
 
-    return df_date
+    return timeframe
 
 
 def query_customer(customer_name, timeframe):
@@ -106,5 +106,5 @@ def query_customer(customer_name, timeframe):
 if __name__ == '__main__':
     print(query_division(10))
     # query_sales()
-    print(query_customer('WELLPET LLC', timeframe=query_dates()))
+    print(query_customer('WELLPET LLC', timeframe=query_dates(timeframe=f"date() >= 1-01-2021")))
 
