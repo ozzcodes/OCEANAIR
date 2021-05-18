@@ -77,34 +77,37 @@ def query_sales():
     print(sales_data.head(20))
 
 
-def query_dates(timeframe):
-    df_date = pd.read_csv('../data/AllShipments_cleaned.csv',
-                          low_memory=False).reset_index(
-        drop=True).drop(columns='Unnamed: 0').dropna(subset=['REPORT DATE'])
+def query_date():
+    # df_date = pd.read_csv('../data/AllShipments_cleaned.csv',
+    #                       low_memory=False).reset_index(
+    #     drop=True).drop(columns='Unnamed: 0').dropna(subset=['REPORT DATE'])
+    #
+    # df_date['REPORT DATE'] = pd.to_datetime(df_date['REPORT DATE'], format="%Y-%m-%d")
+    # start_date = "2019-01-01"
+    # end_date = "2021-05-18"
+    #
+    # after_start_date = df_date['REPORT DATE'] >= start_date
+    # before_end_date = df_date['REPORT DATE'] <= end_date
+    #
+    # between_two_dates = after_start_date & before_end_date
+    # filter_dates = df_date.loc[between_two_dates]
+    pass
 
-    start_date = "1/1/2019"
-    end_date = "3/31/2021"
 
-    after_start_date = df_date['REPORT DATE'] >= start_date
-    before_end_date = df_date['REPORT DATE'] <= end_date
-
-    timeframe = after_start_date & before_end_date
-    df_date = df_date[df_date['REPORT DATE']]
-
-    return timeframe
-
-
-def query_customer(customer_name, timeframe):
+def query_customer(customer_name):
     df_customer = pd.read_csv('../data/AllShipments_cleaned.csv',
                               low_memory=False).reset_index(
         drop=True).drop(columns='Unnamed: 0').dropna(subset=['CUSTOMER NAME'])
 
     df_customer = df_customer[df_customer['CUSTOMER NAME'].str.contains(customer_name)]
-    df_customer.to_csv(f"{customer_name}.csv", index='FILE NO')
+
+    start_date = "2019-01-01"
+    end_date = "2021-05-18"
+    df = df_customer[(df_customer['REPORT DATE'] > start_date) & (df_customer['REPORT DATE'] <= end_date)]
+
+    df.to_csv(f"../data/customer_data_queries/{customer_name}.csv", index='FILE NO')
 
 
 if __name__ == '__main__':
     print(query_division(10))
-    # query_sales()
-    print(query_customer('WELLPET LLC', timeframe=query_dates(timeframe=f"date() >= 1-01-2021")))
-
+    print(query_customer('WELLPET LLC'))
