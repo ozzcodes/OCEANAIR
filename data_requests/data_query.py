@@ -94,4 +94,4 @@ def query_customer(customer_name):
 
 if __name__ == '__main__':
     print(query_division(10))
-    print(query_customer('Wellpet'))
+    print(query_customer('WELLPET LLC'))
