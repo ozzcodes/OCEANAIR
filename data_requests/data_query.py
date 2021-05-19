@@ -77,23 +77,6 @@ def query_sales():
     print(sales_data.head(20))
 
 
-def query_date():
-    # df_date = pd.read_csv('../data/AllShipments_cleaned.csv',
-    #                       low_memory=False).reset_index(
-    #     drop=True).drop(columns='Unnamed: 0').dropna(subset=['REPORT DATE'])
-    #
-    # df_date['REPORT DATE'] = pd.to_datetime(df_date['REPORT DATE'], format="%Y-%m-%d")
-    # start_date = "2019-01-01"
-    # end_date = "2021-05-18"
-    #
-    # after_start_date = df_date['REPORT DATE'] >= start_date
-    # before_end_date = df_date['REPORT DATE'] <= end_date
-    #
-    # between_two_dates = after_start_date & before_end_date
-    # filter_dates = df_date.loc[between_two_dates]
-    pass
-
-
 def query_customer(customer_name):
     df_customer = pd.read_csv('../data/AllShipments_cleaned.csv',
                               low_memory=False).reset_index(
@@ -103,11 +86,12 @@ def query_customer(customer_name):
 
     start_date = "2019-01-01"
     end_date = "2021-05-18"
-    df = df_customer[(df_customer['REPORT DATE'] > start_date) & (df_customer['REPORT DATE'] <= end_date)]
+    df = df_customer[(df_customer['REPORT DATE'] > start_date) & (df_customer['REPORT DATE'] <= end_date)].reset_index(
+        drop=True)
 
     df.to_csv(f"../data/customer_data_queries/{customer_name}.csv", index='FILE NO')
 
 
 if __name__ == '__main__':
     print(query_division(10))
-    print(query_customer('WELLPET LLC'))
+    print(query_customer('Wellpet'))
