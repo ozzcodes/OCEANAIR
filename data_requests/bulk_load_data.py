@@ -35,6 +35,7 @@ def pg_load_table():
     load_data = df.to_sql('ytd_data', con=engine, if_exists='replace', index=True, index_label='FILE NO')
     df.drop_duplicates(load_data)
 
+    # Print out dataframe index to ensure all fields were loaded properly
     print(df.index)
 
 
