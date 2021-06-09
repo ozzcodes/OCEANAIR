@@ -3,7 +3,7 @@ from configparser import ConfigParser
 from data_requests.data_import import data_query
 import pandas as pd
 from sqlalchemy import create_engine
-from data_cleanse import default_data
+from data_cleanse import default_data, unbilled_data
 
 
 # #### Not necessary for this data upload #### #
@@ -36,7 +36,20 @@ def pg_load_table():
     df.drop_duplicates(load_data)
 
     # Print out dataframe index to ensure all fields were loaded properly
+    print("#" * 20)
     print(df.index)
+    print("#" * 20)
+
+    unbilled_files = '../data/Unbilled_cleaned.csv'
+
+    df_unbilled = pd.read_csv(unbilled_files, index_col="FILE NO", error_bad_lines=False, dtype='unicode')
+    load_unbilled = df_unbilled.to_sql('unbilled_files', con=engine, if_exists='replace',
+                                       index=True, index_label='FILE NO')
+    df_unbilled.drop_duplicates(load_unbilled)
+
+    print("#" * 20)
+    print("Loading Unbilled data into database...")
+    print("#" * 20)
 
 
 """
@@ -48,3 +61,4 @@ if __name__ == '__main__':
     sleep(10)
     pg_load_table()
     default_data()
+    # unbilled_data()

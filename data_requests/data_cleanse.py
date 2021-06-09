@@ -26,3 +26,28 @@ def default_data():
     cleaned_data_file.to_csv('../data/AllShipments_cleaned.csv')
 
     return cleaned_data_file
+
+
+def unbilled_data():
+    my_list = []
+
+    for chunk in pd.read_csv(r'R:\Unbilled_Data\.csv',
+                             error_bad_lines=False, chunksize=20000, low_memory=False):
+        my_list.append(chunk)
+
+    df = pd.concat(my_list, axis=0)
+
+    unbilled_file_headers = df[[
+        'FILE NO', 'DIVISION', 'METHOD OF TRANSPORT',
+        'BUSINESS LINE', 'SALESMAN CODE', 'SALESMAN NAME', 'REPORT DATE',
+        'CUSTOMER CODE', 'CUSTOMER NAME', 'PORT OF LOAD NAME', 'PORT OF LOAD COUNTRY',
+        'PORT OF DCHG NAME', 'PORT OF DCHG COUNTRY', 'GROSS WEIGHT', 'REVENUE', 'EXPENSE',
+        'PROFIT', 'TOTAL BILLED TO ACCOUNT', 'TOTAL DUTY BILLED', 'STATUS', 'CONTROLLER',
+        'INV DATE', 'DATE INVOICED'
+    ]]
+
+    del my_list
+
+    unbilled_file_headers.to_csv('../data/Unbilled_cleaned.csv')
+
+    return unbilled_file_headers

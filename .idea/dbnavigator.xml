@@ -24,11 +24,7 @@
     <autoscroll-to-editor value="false" />
     <autoscroll-from-editor value="true" />
     <show-object-properties value="true" />
-    <loaded-nodes>
-      <connection connection-id="ddb8d880-32df-41da-985f-39579f76be4c">
-        <schema name="information_schema" object-types="table, view" />
-      </connection>
-    </loaded-nodes>
+    <loaded-nodes />
   </component>
   <component name="DBNavigator.Project.DatabaseConsoleManager">
     <connection id="ddb8d880-32df-41da-985f-39579f76be4c">
@@ -70,7 +66,7 @@
       <connection id="ddb8d880-32df-41da-985f-39579f76be4c" active="true">
         <database>
           <name value="All_Shipments" />
-          <description value="" />
+          <description value="All shipment data over past few years" />
           <database-type value="POSTGRES" />
           <config-type value="BASIC" />
           <database-version value="13.1" />
@@ -112,7 +108,7 @@
           <connect-automatically value="true" />
           <restore-workspace value="true" />
           <restore-workspace-deep value="true" />
-          <environment-type value="default" />
+          <environment-type value="integration" />
           <connectivity-timeout value="5" />
           <idle-time-to-disconnect value="30" />
           <idle-time-to-disconnect-pool value="5" />
@@ -525,8 +521,8 @@
     </ddl-file-settings>
     <general-settings>
       <regional-settings>
-        <date-format value="MEDIUM" />
-        <number-format value="UNGROUPED" />
+        <date-format value="SHORT" />
+        <number-format value="GROUPED" />
         <locale value="SYSTEM_DEFAULT" />
         <use-custom-formats value="false" />
       </regional-settings>
