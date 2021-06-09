@@ -31,19 +31,19 @@ def default_data():
 def unbilled_data():
     my_list = []
 
-    for chunk in pd.read_csv(r'R:\Unbilled_Data\.csv',
+    for chunk in pd.read_csv(r'R:\Unbilled_Data\sswiz-AW_Unbilled TEST-210609-153859.csv',
                              error_bad_lines=False, chunksize=20000, low_memory=False):
         my_list.append(chunk)
 
     df = pd.concat(my_list, axis=0)
 
     unbilled_file_headers = df[[
-        'FILE NO', 'DIVISION', 'METHOD OF TRANSPORT',
+        'FILE NO', 'DIVISION', 'MODE OF TRANSPORTATION',
         'BUSINESS LINE', 'SALESMAN CODE', 'SALESMAN NAME', 'REPORT DATE',
         'CUSTOMER CODE', 'CUSTOMER NAME', 'PORT OF LOAD NAME', 'PORT OF LOAD COUNTRY',
-        'PORT OF DCHG NAME', 'PORT OF DCHG COUNTRY', 'GROSS WEIGHT', 'REVENUE', 'EXPENSE',
-        'PROFIT', 'TOTAL BILLED TO ACCOUNT', 'TOTAL DUTY BILLED', 'STATUS', 'CONTROLLER',
-        'INV DATE', 'DATE INVOICED'
+        'PORT OF DCHG NAME', 'PORT OF DCHG COUNTRY', 'GROSS WEIGHT', 'REVENUE',
+        'PROFIT', 'TOTAL BILLED TO ACCOUNT', 'STATUS', 'CONTROLLER',
+        'INV DATE', 'DATE INVOICED', 'LAST EVENT NAME'
     ]]
 
     del my_list
