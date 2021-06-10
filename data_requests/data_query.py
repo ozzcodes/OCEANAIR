@@ -7,6 +7,9 @@ Create a function to query specific data
 
 
 def query_division(div):
+    """
+    :rtype: division to be filtered
+    """
     df = pd.read_csv('../data/AllShipments_cleaned.csv', low_memory=False)
     format_dict = {
         col_name: '{:,.2f}' for col_name in df.select_dtypes(float).columns
@@ -77,21 +80,27 @@ def query_sales():
     print(sales_data.head(20))
 
 
-def query_customer(customer_name):
+def query_customer(customer_name: list):
+    """
+    :param customer_name: a list of customer codes to query customer data
+    """
     df_customer = pd.read_csv('../data/AllShipments_cleaned.csv',
                               low_memory=False).reset_index(
         drop=True).drop(columns='Unnamed: 0').dropna(subset=['CUSTOMER CODE'])
 
-    df_customer = df_customer[df_customer['CUSTOMER CODE'].str.contains(customer_name)]
+    df_customer = df_customer[df_customer['CUSTOMER CODE'].str.contains('|'.join(customer_name))]
 
-    start_date = "2021-01-01"
-    end_date = "2021-05-26"
-    df = df_customer[(df_customer['REPORT DATE'] > start_date) & (df_customer['REPORT DATE'] <= end_date)].reset_index(
-        drop=True)
+    start_date = "2020-06-01"
+    end_date = "2021-05-31"
+    df = df_customer[(df_customer['REPORT DATE'] > start_date) &
+                     (df_customer['REPORT DATE'] <= end_date)].reset_index(drop=True)
 
     df.to_csv(f"../data/customer_data_queries/{customer_name}.csv", index='FILE NO')
 
 
+# Customer codes to search for
+customer_codes = ['AKOBIO02', 'AKOBIO01', 'AKOBIO03', 'AKOYA02']
+
 if __name__ == '__main__':
     print(query_division(10))
-    print(query_customer('CHAADV01'))
+    print(query_customer(customer_name=customer_codes))
