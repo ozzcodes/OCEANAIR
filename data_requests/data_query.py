@@ -90,12 +90,12 @@ def query_customer(customer_name: list):
 
     df_customer = df_customer[df_customer['CUSTOMER CODE'].str.contains('|'.join(customer_name))]
 
-    start_date = "2020-06-01"
+    start_date = "2019-06-01"
     end_date = "2021-05-31"
     df = df_customer[(df_customer['REPORT DATE'] > start_date) &
                      (df_customer['REPORT DATE'] <= end_date)].reset_index(drop=True)
 
-    df.to_csv(f"../data/customer_data_queries/{customer_name}.csv", index='FILE NO')
+    df.to_csv(f"../data/customer_data_queries/{'%s'}.csv" % customer_name, index='FILE NO')
 
 
 # Customer codes to search for

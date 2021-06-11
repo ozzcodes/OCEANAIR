@@ -40,16 +40,21 @@ def pg_load_table():
     print(df.index)
     print("#" * 20)
 
-    # unbilled_files = '../data/Unbilled_cleaned.csv'
-    #
-    # df_unbilled = pd.read_csv(unbilled_files, index_col="FILE NO", error_bad_lines=False, dtype='unicode')
-    # load_unbilled = df_unbilled.to_sql('unbilled', con=engine, if_exists='replace',
-    #                                    index=True, index_label='FILE NO')
-    # df_unbilled.drop_duplicates(load_unbilled)
-    #
-    # print("#" * 20)
-    # print("Loading Unbilled data into database...")
-    # print("#" * 20)
+
+def pg_load_unbilled():
+    # Create sqlalchemy engine connection to postgres
+    engine = create_engine('postgresql+psycopg2://postgres:0212181@localhost:5432/postgres')
+
+    unbilled_files = '../data/Unbilled_cleaned.csv'
+
+    df_unbilled = pd.read_csv(unbilled_files, index_col="FILE NO", error_bad_lines=False, dtype='unicode')
+    load_unbilled = df_unbilled.to_sql('unbilled', con=engine, if_exists='replace',
+                                       index=True, index_label='FILE NO')
+    df_unbilled.drop_duplicates(load_unbilled)
+
+    print("#" * 20)
+    print("Loading Unbilled data into database...")
+    print("#" * 20)
 
 
 """
@@ -57,8 +62,9 @@ Run the main function to import the newly generated CSV file into the SQL Databa
 and create a cleaned CSV file to work with separately (AllShipments_cleaned.csv)
 """
 if __name__ == '__main__':
-    # unbilled_data()
     data_query()
+    default_data()
+    unbilled_data()
     sleep(10)
     pg_load_table()
-    default_data()
+    pg_load_unbilled()
