@@ -50,7 +50,7 @@ def pg_load_unbilled():
     df_unbilled = pd.read_csv(unbilled_files, index_col="FILE NO", error_bad_lines=False, dtype='unicode')
     load_unbilled = df_unbilled.to_sql('unbilled', con=engine, if_exists='replace',
                                        index=True, index_label='FILE NO')
-    df_unbilled.drop_duplicates(load_unbilled)
+    df_unbilled.drop_duplicates(load_unbilled).drop(columns='Unnamed: 0')
 
     print("#" * 20)
     print("Loading Unbilled data into database...")
